@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class ArtistRepositoryIntegrationTest {
 	@Autowired
 	private IArtistRepository artistRepository;
 
+	@Disabled
 	@Test
 	public void createArtistTest() throws Exception {
 		Artist artist = new Artist(null, "AC/DC", "AC/DC are an Australian rock band formed in Sydney in 1973 ", ArtistCategory.GROUP, "1973-01-01", "Australia",
@@ -43,6 +45,7 @@ public class ArtistRepositoryIntegrationTest {
 		artistRepository.saveArtist(artist, false);
 	}
 
+	@Disabled
 	@Test
 	public void getAllArtistTest() throws Exception {
 

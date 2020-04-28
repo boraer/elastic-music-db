@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,7 @@ public class AlbumRepositoryIntegrationTest {
 	@Autowired
 	private AlbumRepository albumRepository;
 
+	@Disabled
 	@Test
 	public void createAlbumTest() {
 
@@ -44,6 +46,7 @@ public class AlbumRepositoryIntegrationTest {
 		albumRepository.saveAlbum(album, true);
 	}
 
+	@Disabled
 	@Test
 	void updateAlbum() {
 
