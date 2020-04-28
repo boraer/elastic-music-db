@@ -26,4 +26,6 @@ public interface IAlbumRepository {
 
 	List<Album> searchArtistAlbumsByGenre(String id, String genre);
 
+	void mappingconfig();
+
 }

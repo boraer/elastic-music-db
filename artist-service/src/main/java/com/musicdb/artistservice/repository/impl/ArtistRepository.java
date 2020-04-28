@@ -3,6 +3,7 @@ package com.musicdb.artistservice.repository.impl;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.elasticsearch.action.search.SearchResponse;
@@ -64,9 +65,11 @@ public class ArtistRepository implements IArtistRepository {
 	@Override
 	public Artist saveArtist(Artist artist, Boolean refresh) {
 		try {
+			mappingConfig();
 			final IndexQuery indexQuery = new IndexQueryBuilder().withIndexName(Artist.INDEX_NAME)
 					.withType(Artist.TYPE_NAME).withSource(objectMapper.writeValueAsString(artist)).build();
 			final String id = elasticOperations.index(indexQuery);
+			
 			if (refresh)
 				elasticOperations.refresh(Artist.INDEX_NAME);
 
@@ -140,4 +143,11 @@ public class ArtistRepository implements IArtistRepository {
 			SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).build();
 			return elasticOperations.queryForPage(searchQuery, Artist.class);
 		}
+	
+	private void mappingConfig() {
+		
+		Map<String,Object> mapping = elasticOperations.getMapping(Artist.class);
+		if(mapping.isEmpty())
+			elasticOperations.putMapping(Artist.class);
+	}
 }

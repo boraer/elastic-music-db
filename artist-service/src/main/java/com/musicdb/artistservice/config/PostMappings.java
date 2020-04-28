@@ -22,6 +22,12 @@ public class PostMappings {
 	
 	@PostConstruct
 	public void mapping() {
+		try {
+			Thread.sleep(60000);
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
 		elasticsearchOperations.putMapping(Artist.class);
 	}
 

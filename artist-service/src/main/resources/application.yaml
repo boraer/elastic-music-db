@@ -1,6 +1,6 @@
   
 app.elastic:
-  host: 127.0.0.1
+  host: elasticsearch-v6
   port: 9200
   portAlternate: 9201
  

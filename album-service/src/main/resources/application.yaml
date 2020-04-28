@@ -1,5 +1,5 @@
 app.elastic:
-  host: 127.0.0.1
+  host: elasticsearch-v6
   port: 9200
   portAlternate: 9201
       
@@ -7,11 +7,9 @@ discogs:
   url: https://api.discogs.com/database/search
   token: bGgeOLmUZGCiDThWTbqIcpcpyXkzizJQIDHOnCNu
   
-album-service:
-  ribbon:
-    eureka:
-      enabled: false
-    listOfServers: localhost:8080
-    
+
 server:
   port: 8081    
+  
+artist-service:
+  url: http://artist-service:8080

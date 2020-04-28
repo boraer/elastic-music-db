@@ -1,6 +1,7 @@
 package com.musicdb.albumservice.repository.impl;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -51,6 +52,7 @@ public class AlbumRepository implements IAlbumRepository {
 	@Override
 	public Album saveAlbum(Album album, Boolean refresh) {
 		try {
+			mappingconfig();
 			final IndexQuery indexQuery = new IndexQueryBuilder().withIndexName(Album.INDEX_NAME)
 					.withType(Album.TYPE_NAME).withSource(objectMapper.writeValueAsString(album)).build();
 			final String id = elasticOperations.index(indexQuery);
@@ -130,16 +132,25 @@ public class AlbumRepository implements IAlbumRepository {
 	@Override
 	public List<Album> searchArtistAlbumsByGenre(String id, String genre) {
 		SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(generateDefaultNestedQuery(id)).build();
-		return elasticOperations.queryForList(searchQuery, Album.class).stream().filter(album->album.getGenre().contains(genre)).collect(Collectors.toList());
+		return elasticOperations.queryForList(searchQuery, Album.class).stream()
+				.filter(album -> album.getGenre().contains(genre)).collect(Collectors.toList());
 	}
 
-	
 	private NestedQueryBuilder generateDefaultNestedQuery(String artistId) {
-	   return new NestedQueryBuilder(Artist.PATH,generateDefaultBoolQuery(artistId),org.apache.lucene.search.join.ScoreMode.None);
+		return new NestedQueryBuilder(Artist.PATH, generateDefaultBoolQuery(artistId),
+				org.apache.lucene.search.join.ScoreMode.None);
 	}
-	
+
 	private BoolQueryBuilder generateDefaultBoolQuery(String artistId) {
 		return QueryBuilders.boolQuery().must(QueryBuilders.matchQuery("artists.artistId", artistId));
 	}
-	
+
+	@Override
+	public void mappingconfig() {
+		try {
+			elasticOperations.putMapping(Album.class);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
 }

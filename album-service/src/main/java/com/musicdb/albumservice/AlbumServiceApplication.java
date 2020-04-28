@@ -8,7 +8,6 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableCircuitBreaker
-@RibbonClient(name = "album-service") 
 public class AlbumServiceApplication {
 
 	

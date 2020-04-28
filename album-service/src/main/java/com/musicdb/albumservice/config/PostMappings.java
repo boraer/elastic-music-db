@@ -18,9 +18,15 @@ public class PostMappings {
 	public PostMappings( ElasticsearchOperations elasticsearchOperations) {
 		this.elasticsearchOperations = elasticsearchOperations;
 	}
-	
+
 	@PostConstruct
 	public void mapping() {
+		try {
+			Thread.sleep(60000);
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
 		elasticsearchOperations.putMapping(Album.class);
 	}
 

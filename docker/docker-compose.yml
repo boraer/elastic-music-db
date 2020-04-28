@@ -1,0 +1,44 @@
+version: '3.3'
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.8.8
+    restart: always
+    networks:
+      - app_default_net
+    container_name: elasticsearch-v6
+    environment:
+      - "discovery.type=single-node"
+    expose:
+      - "9200"
+    ports:
+      - "9200:9200"
+
+  artist-service:
+    image: artist-service:0.0.1-SNAPSHOT
+    container_name: artist-service
+    restart: always
+    networks:
+      - app_default_net
+    depends_on:
+      - elasticsearch
+    expose:
+      - "8080"
+    ports:
+      -  "8080:8080"
+      
+  album-service:
+    image: album-service:0.0.1-SNAPSHOT
+    container_name: album-service
+    restart: always
+    networks:
+      - app_default_net
+    depends_on:
+      - elasticsearch
+    expose:
+      - "8081"
+    ports:
+      -  "8081:8081"
+      
+networks:
+    app_default_net:
+      

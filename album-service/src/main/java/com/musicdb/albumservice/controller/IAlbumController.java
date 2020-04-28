@@ -34,5 +34,4 @@ public interface IAlbumController {
 			@RequestParam(required = false, name = "genre") final String genre,
 			@PageableDefault(page = 0, size = 20) @SortDefault.SortDefaults({
 					@SortDefault(sort = "albumName", direction = Direction.DESC) }) Pageable pageable);
-
 }

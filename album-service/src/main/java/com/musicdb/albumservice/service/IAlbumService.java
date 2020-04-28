@@ -27,4 +27,7 @@ public interface IAlbumService {
     Album updateAlbum(String albumId,Actions actions);
 
 	Page<Album> searchArtistAlbumsByGenre(String artistId, String genre, Pageable pageable);
+	
+	void mappingconfig();
+	
 }

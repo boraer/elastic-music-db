@@ -65,4 +65,9 @@ public class AlbumService implements IAlbumService {
 		return null;
 	}
 
+	@Override
+	public void mappingconfig() {
+		albumRepository.mappingconfig();
+	}
+
 }
