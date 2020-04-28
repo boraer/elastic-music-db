@@ -58,4 +58,9 @@ public class ArtistService implements IArtistService {
 			artistRepository.findById(artist.getParentId());
 	}
 
+	@Override
+	public Artist findById(String id) {
+		return artistRepository.findById(id);
+	}
+
 }

@@ -1,12 +1,8 @@
-spring.data:
-  elasticsearch:
-    cluster-name: docker-cluster
-    cluster-nodes: 127.0.0.1:9300
-    repositories.enabled: true
-    
-
+  
 app.elastic:
   host: 127.0.0.1
   port: 9200
   portAlternate: 9201
-      
+ 
+server:
+  port: 8080   

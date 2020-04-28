@@ -23,7 +23,7 @@ public class Util {
 	private static final Collection<String> KNOWN_QUERY_PARAMETERS = Collections
 			.unmodifiableCollection(new HashSet<String>() {
 				{
-					add("keyword");
+					add("genre");
 				}
 			});
 
@@ -69,7 +69,7 @@ public class Util {
 		return StringUtils.trimToNull(map.get(key));
 	}
 
-	public static String extractPassId(Map<String, String> pathVariables) {
+	public static String extractArtistId(Map<String, String> pathVariables) {
 		return getAsStringNullable(pathVariables, "artistId");
 	}
 

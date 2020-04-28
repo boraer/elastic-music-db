@@ -38,7 +38,7 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 	}
 
 	@Value
-	protected static class ApiError {
+	public static class ApiError {
 		ErrorCode code;
 		String message;
 	}

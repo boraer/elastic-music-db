@@ -18,5 +18,6 @@ public interface IArtistService {
 	Page<Artist> findAll(Pageable pageable);
 
 	Page<Artist> search(String keyword, Pageable pageable);
-
+    
+	Artist findById(String id);
 }

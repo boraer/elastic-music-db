@@ -23,7 +23,7 @@ public class ArtistController implements IArtistController {
 
 	@Override
 	public ResponseEntity<Artist> createArtist(Artist artist) {
-		 return new ResponseEntity<>(artistService.saveArtist(artist), HttpStatus.CREATED);
+		return new ResponseEntity<>(artistService.saveArtist(artist), HttpStatus.CREATED);
 	}
 
 	@Override
@@ -38,6 +38,11 @@ public class ArtistController implements IArtistController {
 			return artistService.findAll(pageable);
 		else
 			return artistService.search(keyword, pageable);
+	}
+
+	@Override
+	public Artist geteArtist(String artistId) {
+		return artistService.findById(artistId);
 	}
 
 }

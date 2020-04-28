@@ -21,9 +21,14 @@ public interface IArtistController {
 	@PutMapping(path = "/{artistId}")
 	Artist updateArtist(@PathVariable("artistId") String artistId, @RequestBody final Artist artist);
 
+	
+	@GetMapping(path = "/{artistId}")
+	Artist geteArtist(@PathVariable("artistId") String artistId);
+
+	
 	@GetMapping
 	Page<Artist> getArtists(@RequestParam(required = false, name = "keyword") final String keyword,
 			@PageableDefault(page = 0, size = 20) @SortDefault.SortDefaults({
 					@SortDefault(sort = "name", direction = Direction.DESC) }) Pageable pageable);
-
+   
 }
