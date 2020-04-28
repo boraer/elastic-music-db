@@ -54,6 +54,7 @@ public class ArtistRepositoryIntegrationTest {
 		assertTrue(!page.isEmpty());
 	}
 
+	@Disabled
 	@Test
 	public void updateArtist() {
 		Pageable pageable = PageRequest.of(0, 1, Sort.by(Order.desc("name")));
