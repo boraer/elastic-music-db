@@ -1,0 +1,512 @@
+{
+	"info": {
+		"_postman_id": "b2e23da9-8114-4f25-96df-1656c55716ad",
+		"name": "ElasticSearch API Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "artist-service",
+			"item": [
+				{
+					"name": "Add Artist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6e45d3ae-83dd-427e-8756-4b18a65a561b",
+								"exec": [
+									"tests[\"Status code \" + responseCode.code] = responseCode.code === 200 || responseCode.code === 201;",
+									"var data = JSON.parse(responseBody);",
+									"if(data.id){",
+									"    postman.setEnvironmentVariable(\"artist-id\", data.id);",
+									"    postman.setEnvironmentVariable(\"artist-name\",data.name);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Bon Jovi\",\n\t\"autobiography\":\"Bon Jovi is an American rock band formed in 1983 in Sayreville, New Jersey. It consists of singer Jon Bon Jovi, keyboardist David Bryan, drummer Tico Torres, guitarist Phil X, and bassist Hugh McDonald.[1] Previous bassist Alec John Such was dismissed in 1994, and longtime guitarist and co-songwriter Richie Sambora left in 2013.\",\n\t\"artistCategory\":\"group\",\n\t\"country\":\"US\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{artist-service-host}}/artists",
+							"host": [
+								"{{artist-service-host}}"
+							],
+							"path": [
+								"artists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Artist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8781f83e-c386-4628-95e4-9ed39ef54bc0",
+								"exec": [
+									"tests[\"Status code \" + responseCode.code] = responseCode.code === 200 || responseCode.code === 201;",
+									"var data = JSON.parse(responseBody);",
+									"if(data.id){",
+									"    postman.setEnvironmentVariable(\"artist-id\", data.id);",
+									"    postman.setEnvironmentVariable(\"artist-name\",data.name);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"WmKeu3EBvvcDw7wjHGN-\",\r\n    \"name\": \"Bon Jovi\",\r\n    \"autobiography\": \"Bon Jovi is an American rock band formed in 1983 in Sayreville, New Jersey. It consists of singer Jon Bon Jovi, keyboardist David Bryan, drummer Tico Torres, guitarist Phil X, and bassist Hugh McDonald.[1] Previous bassist Alec John Such was dismissed in 1994, and longtime guitarist and co-songwriter Richie Sambora left in 2013.\",\r\n    \"artistCategory\": \"group\",\r\n    \"dateOfBirth\": \"1983-01-01\",\r\n    \"country\": \"US\",\r\n    \"parentId\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{artist-service-host}}/artists/{{artist-id}}",
+							"host": [
+								"{{artist-service-host}}"
+							],
+							"path": [
+								"artists",
+								"{{artist-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Artists Pageable",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{artist-service-host}}/artists",
+							"host": [
+								"{{artist-service-host}}"
+							],
+							"path": [
+								"artists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Artists",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{artist-service-host}}/artists",
+							"host": [
+								"{{artist-service-host}}"
+							],
+							"path": [
+								"artists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Searc Artists",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{artist-service-host}}/artists?keyword=\"jo\"",
+							"host": [
+								"{{artist-service-host}}"
+							],
+							"path": [
+								"artists"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "\"jo\""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "album-service",
+			"item": [
+				{
+					"name": "Search Album By Artist",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{artist-service-host}}/artists/{{artist-id}}/albums",
+							"host": [
+								"{{artist-service-host}}"
+							],
+							"path": [
+								"artists",
+								"{{artist-id}}",
+								"albums"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Album By Artist Filter By Genre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{artist-service-host}}/artists/{{artist-id}}/albums?genre=Hard",
+							"host": [
+								"{{artist-service-host}}"
+							],
+							"path": [
+								"artists",
+								"{{artist-id}}",
+								"albums"
+							],
+							"query": [
+								{
+									"key": "genre",
+									"value": "Hard"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Album",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8efeb85a-3a84-4087-bafb-85d519797472",
+								"exec": [
+									"tests[\"Status code \" + responseCode.code] = responseCode.code === 200 || responseCode.code === 201;",
+									"var data = JSON.parse(responseBody);",
+									"if(data.id){",
+									"    postman.setEnvironmentVariable(\"album-id\", data.id);",
+									"    postman.setEnvironmentVariable(\"artist-id\",data.artists.id);",
+									"     postman.setEnvironmentVariable(\"artist-name\",data.artists.name);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n            \"albumName\": \"crush\",\r\n            \"releaseYear\": 2000,\r\n            \"artists\": [\r\n                {\r\n                    \"artistId\": \"WWKbu3EBvvcDw7wj7WMP\",\r\n                    \"name\": \"bon jovi\"\r\n                }\r\n            ],\r\n            \"genre\": \"Hard Rock, Pop\",\r\n            \"rating\": {\r\n                \"score\": 0,\r\n                \"count\": 0\r\n            }\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{artist-service-host}}/artists/{{artist-id}}/albums",
+							"host": [
+								"{{artist-service-host}}"
+							],
+							"path": [
+								"artists",
+								"{{artist-id}}",
+								"albums"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "elastic",
+			"item": [
+				{
+					"name": "artist",
+					"item": [
+						{
+							"name": "Get Artist Index",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/artist/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"artist",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Artist All",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/artist/_search",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"artist",
+										"_search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Artist By Match",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "\r\n{\r\n  \"query\": {\r\n    \"bool\": {\r\n      \"must\": {\r\n        \"match\": {\r\n          \"parentId\":{ \r\n          \t\"query\": \"26k1uXEBLiRuIWU1AK-e\"}\r\n        }\r\n      },\r\n      \"filter\": {\r\n        \"match\": {\r\n          \"name\": \"Er\"\r\n          \r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/artist/_search",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"artist",
+										"_search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Artist Index",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/artist",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"artist"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create ArtistIndex",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"settings\":{\n  \"analysis\": {\n    \"filter\": {\n      \"autocomplete_filter\": {\n        \"type\": \"edge_ngram\",\n        \"min_gram\": 1,\n        \"max_gram\": 20\n      }\n    },\n    \"analyzer\": {\n      \"autocomplete_search\": {\n        \"type\": \"custom\",\n        \"tokenizer\": \"standard\",\n        \"filter\": [\n          \"lowercase\"\n        ]\n      },\n      \"autocomplete_index\": {\n        \"type\": \"custom\",\n        \"tokenizer\": \"standard\",\n        \"filter\": [\n          \"lowercase\",\n          \"autocomplete_filter\"\n        ]\n      }\n    }\n  }\n}\n\t\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/artist",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"artist"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "album",
+					"item": [
+						{
+							"name": "Create Album Index",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"settings\":{\n  \"analysis\": {\n    \"filter\": {\n      \"autocomplete_filter\": {\n        \"type\": \"edge_ngram\",\n        \"min_gram\": 1,\n        \"max_gram\": 20\n      }\n    },\n    \"analyzer\": {\n      \"autocomplete_search\": {\n        \"type\": \"custom\",\n        \"tokenizer\": \"standard\",\n        \"filter\": [\n          \"lowercase\"\n        ]\n      },\n      \"autocomplete_index\": {\n        \"type\": \"custom\",\n        \"tokenizer\": \"standard\",\n        \"filter\": [\n          \"lowercase\",\n          \"autocomplete_filter\"\n        ]\n      }\n    }\n  }\n}\n\t\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/album",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"album"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Album Index",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/album/_search",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"album",
+										"_search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Album By Match",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n            \"query\" : {\r\n            \t\r\n                \"nested\" : {\r\n                    \"path\" :  \"artists\",\r\n                    \"query\" :  {\r\n                        \"bool\" : {\r\n                            \"must\" : [\r\n                                { \"match\" : { \"artists.artistId\" : \"WWKbu3EBvvcDw7wj7WMP\" } }\r\n                              \r\n                            ]\r\n                            \r\n                        }\r\n                         \r\n                    }\r\n                }\r\n                 \r\n                 \r\n      }   \r\n\r\n    \r\n      \r\n}\r\n\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/album/_search",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"album",
+										"_search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Album Index",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/album",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"album"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
