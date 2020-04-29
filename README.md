@@ -35,8 +35,6 @@ After running the project
  - [ ] it is needed to create Album and Artist indexes via postman collection
  - [ ] It is needed to create indexes in 1 minute because services has a batch service which puts mapping  for objects 1 minute later services are started
 
-For learning purposes, I use ElasticSearch api to create and manage index. I also started project with spring-data-elasticsearch but i did not use boiler-plate jpa ElasticSearch Crud Repository. Instead I implemented my own repository classes with using elastich high rest client
-
 ## *Modeling the Data*
 
 For this project, there are just 2 objects exist which are Artist and Album. Firstly, It was thought to use parent-child relationship but then realized that after Elastic Search v5.6 parent-child relations was removed. Therefore I modelled my data as 2 indexes which are Artist and Album but also Album has a partial version of Artist as a nested object. 
@@ -72,6 +70,7 @@ For getting the album details and put it to the api call response. 3th party ser
  1. Album details are get from Discogs Api
  2. with Aspect oriented programming  number of call ,average processing time per endpoint and time taken to Discogs Api is kept and logged
  3. infastructure works on Docker platform
+ 4. For learning purposes, I use ElasticSearch api to create and manage index. I also started project with spring-data-elasticsearch but i did not use boiler-plate jpa ElasticSearch Crud Repository. Instead I implemented my own repository classes with using elastich high rest client
  
  
  ## *Difficulties*
