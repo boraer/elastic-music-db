@@ -33,7 +33,7 @@ running  ElasticSearch and Services @Docker environment
     docker-compose up
 After running the project 
  - [ ] it is needed to create Album and Artist indexes via postman collection
- - [ ] It is needed to create indexes in 1 minute because services has a batch service which puts mapping object for objects 1 minute later services is started
+ - [ ] It is needed to create indexes in 1 minute because services has a batch service which puts mapping  for objects 1 minute later services are started
 
 ## *Modeling the Data*
 
@@ -74,7 +74,7 @@ For getting the album details and put it to the api call response. 3th party ser
  
  ## *Difficulties*
  
-This was the first time I used Elasticsearch. Therefore, I needed to read documentation and also practice. In addition it was a bit hard to understand the data structure of ElasticSearch It was encountered that Elastic Search 7.6 has a bug with spring-data-elasticsearch and java elastic high rest client has a connection bug. Therefore it was downgraded to version 6.8.8 . In addition spring-data-elasticsearch does not have querydsl. So, restQuery can not be implementend
+This was the first time I used Elasticsearch. Therefore, I needed to read documentation and also practice. In addition it was a bit hard to understand the data structure of ElasticSearch It was encountered that Elastic Search 7.6 has a bug with spring-data-elasticsearch and java elastic high rest client has a connection bug. So, it was downgraded to version 6.8.8 . In addition spring-data-elasticsearch does not have querydsl. So, restQuery can not be implementend
  
 
   
