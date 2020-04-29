@@ -42,3 +42,39 @@ For this project, there are just 2 objects exist which are Artist and Album. Fir
 I tried to build up a hybrid denormalized-nested structure([For further reading elasticsearch how to model data](https://www.elastic.co/guide/en/elasticsearch/guide/master/modeling-your-data.html)). In album index, it is just kept id and name fields of artist. It is not so common that one artist would change its name or the record would be created wrong. In that cases Album index is need to be update.
 
 In case of re-indexing issues, it might be designed a message or stream based pipeline between services and with one batch job can update the nested data in album if there  are exist name field updated artists.
+
+## *Api*
+
+**REST API**
+
+ - [ ] /artists endpoint to manage Artist data. Required information:artist name
+ - POST /artists to save a new artist
+ - PUT /artists/{artistId} to update an existing artist
+ - GET /artists lists all artists.
+
+**Filtering by a part of artist name, sorting by artist name (asc/desc),paging applicable**
+
+ - [ ] /artists/{artistId}/albums endpoint to manage Album data. Required information: title, year of release, genres (list of tags).
+ - POST /artists/{artistId}/albums to add a new album to an existingartist
+ - PUT /artists/{artistId}/albums/{albumId} to update an existing album
+ - GET /artists/{artistId}/albums lists all albums by the given artist.
+
+**Filtering by genre(s), sorting by album name (asc/desc) applicable**
+
+### *Album Details*
+
+For getting the album details and put it to the api call response. 3th party service [Discogs API has been used to get Album details with its search endpoint](https://www.discogs.com/developers#page:database,header:database-search)
+
+## *Extra Work*
+
+ 1. Album details are get from Discogs Api
+ 2. with Aspect oriented programming  number of call ,average processing time per endpoint and time taken to Discogs Api is kept and logged
+ 3. infastructure works on Docker platform
+ 
+ 
+ ## *Difficulties*
+ 
+This was the first time I used Elasticsearch. Therefore, I needed to read documentation and also practice. In addition it was a bit hard to understand the data structure of ElasticSearch It was encountered that Elastic Search 7.6 has a bug with spring-data-elasticsearch and java elastic high rest client has a connection bug. Therefore it was downgraded to version 6.8.8 . In addition spring-data-elasticsearch does not have querydsl. So, restQuery can not be implementend
+ 
+
+  
